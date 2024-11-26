@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using IActionResultExample.Models;
 
 namespace IActionResultExample.Controllers
 {
     public class HomeController : Controller
     {
-        [Route("/bookstore")]
-        public IActionResult Index()
-        // http://localhost:5210/bookstore?bookid=1&isloggedin=true
+        [Route("/bookstore/{bookid?}/{isloggedin?}")]
+        public IActionResult Index([FromQuery]int? bookid, [FromRoute]bool isloggedin, Book book)
+        // http://localhost:5210/bookstore/1/true?bookid=2&isloggedin=false
         {
-            if (Convert.ToBoolean(Request.Query["isloggedin"]) == false)
+            if (Convert.ToBoolean(isloggedin) == false)
             {
                 //Response.StatusCode = 401;
                 //return Content("User must be logged in for this action.");
@@ -16,31 +17,23 @@ namespace IActionResultExample.Controllers
             }
 
             // Book id should be provided
-            if (!Request.Query.ContainsKey("bookid"))
+            if (!bookid.HasValue)
             {
                 //Response.StatusCode = 400;
                 //return Content("Book id is not supplied");
-                return BadRequest("Book id is not supplied");
+                return BadRequest("Book id is not supplied or invalid");
             }
 
-            // Book id should not be empty
-            if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
+            // Book id should not be less than 0
+            if (bookid <= 0)
             {
                 //Response.StatusCode = 400;
                 //return Content("Book id can not be null or empty!");
-                return BadRequest("Book id can not be null or empty!");
+                return BadRequest("Book id can not be less than or equal to 0!");
             }
 
             // Book id should be in range 1-1000
-            int bookId = Convert.ToInt32(ControllerContext.HttpContext.Request.Query["bookid"]);
-            if(bookId <= 0)
-            {
-                //Response.StatusCode = 400;
-                //return Content("Book id can not be less than or equal to 0");
-                return BadRequest("Book id can not be less than or equal to 0");
-            }
-
-            if (bookId > 1000)
+            if (bookid > 1000)
             {
                 //Response.StatusCode = 404;
                 //return Content("Book id can not be greater than 1000");
