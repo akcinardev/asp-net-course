@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IActionResultExample", "IAc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAppAssignment", "BankAppAssignment\BankAppAssignment.csproj", "{3663580F-1887-430E-9526-CC840BC975C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelValidationExample", "ModelValidationExample\ModelValidationExample.csproj", "{04659FF4-1229-4DDE-A9B4-A2D5C1D59B1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3663580F-1887-430E-9526-CC840BC975C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3663580F-1887-430E-9526-CC840BC975C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3663580F-1887-430E-9526-CC840BC975C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04659FF4-1229-4DDE-A9B4-A2D5C1D59B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04659FF4-1229-4DDE-A9B4-A2D5C1D59B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04659FF4-1229-4DDE-A9B4-A2D5C1D59B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04659FF4-1229-4DDE-A9B4-A2D5C1D59B1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
