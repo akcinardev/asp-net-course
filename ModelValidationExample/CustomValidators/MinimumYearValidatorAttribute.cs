@@ -5,7 +5,7 @@ namespace ModelValidationExample.CustomValidators
     public class MinimumYearValidatorAttribute : ValidationAttribute
     {
         public int MinimumYear { get; set; } = 2000;
-        public string DefaultErrorMessage { get; set; } = "Year should not be less than {0}";
+        public string DefaultErrorMessage { get; set; } = "Year should less than {0}";
 
         // parameterless constructor
         public MinimumYearValidatorAttribute()
