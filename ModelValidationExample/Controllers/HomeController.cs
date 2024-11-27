@@ -7,7 +7,8 @@ namespace ModelValidationExample.Controllers
     public class HomeController : Controller
     {
         [Route("register")]
-        public IActionResult Index([FromBody] [ModelBinder(BinderType = typeof(PersonModelBinder))] Person person)
+        //public IActionResult Index([FromBody] [ModelBinder(BinderType = typeof(PersonModelBinder))] Person person)
+        public IActionResult Index(Person person, [FromHeader(Name = "User-Agent")] string userAgent)
         {
             if(!ModelState.IsValid)
             {
@@ -26,7 +27,7 @@ namespace ModelValidationExample.Controllers
                 return BadRequest(errors);
             }
 
-            return Content($"{person}");
+            return Content($"{person}, {userAgent}");
         }
     }
 }
