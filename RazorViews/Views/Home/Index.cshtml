@@ -1,24 +1,29 @@
 ﻿@using RazorViews.Models
 
 @{
-	string appTitle = "Razor Views Example";
-	List<Person> people = new List<Person>() {
-		new Person() { Name = "Omer", Birthday = Convert.ToDateTime("1998-07-10") , Gender = Gender.Male},
-		new Person() { Name = "Beyza", Birthday = Convert.ToDateTime("1999-02-11") , Gender = Gender.Female},
-		new Person() { Name = "Isra", Birthday = Convert.ToDateTime("1998-06-15") , Gender = Gender.Female}
-	};
+	// string appTitle = "Razor Views Example";
+	// List<Person> people = new List<Person>() {
+	// 	new Person() { Name = "Omer", Birthday = Convert.ToDateTime("1998-07-10") , Gender = Gender.Male},
+	// 	new Person() { Name = "Beyza", Birthday = Convert.ToDateTime("1999-02-11") , Gender = Gender.Female},
+	// 	new Person() { Name = "Isra", Birthday = Convert.ToDateTime("1998-06-15") , Gender = Gender.Female}
+	// };
+	List<Person>? people = ((List<Person>?)ViewData["people"]);
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>@appTitle</title>
+	<title>@ViewData["pageTitle"]</title>
 	<meta charset="utf-8" />
+	<link href="~/StyleSheet.css" rel="stylesheet"/>
 </head>
 <body>
+	<div class="page-content">
+
+	</div>
 	<h1>Welcome</h1>
 	@foreach(Person person in people) {
-		<text>Hi to @person.Name</text>
+		<p>Hi to @person.Name</p>
 	}
 	@* <h2>Current User: @person.Name</h2>
 
