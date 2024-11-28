@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelValidationExample", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorViews", "RazorViews\RazorViews.csproj", "{0258F875-D0DE-42C7-BB59-7A97EF90D800}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAppAssignment", "WeatherAppAssignment\WeatherAppAssignment.csproj", "{AC3958F9-6AE1-442A-A965-7681D8DCEB1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{0258F875-D0DE-42C7-BB59-7A97EF90D800}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0258F875-D0DE-42C7-BB59-7A97EF90D800}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0258F875-D0DE-42C7-BB59-7A97EF90D800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3958F9-6AE1-442A-A965-7681D8DCEB1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3958F9-6AE1-442A-A965-7681D8DCEB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3958F9-6AE1-442A-A965-7681D8DCEB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3958F9-6AE1-442A-A965-7681D8DCEB1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

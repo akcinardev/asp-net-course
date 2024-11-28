@@ -1,0 +1,28 @@
+﻿@model List<CityWeather>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather App</title>
+        <meta charset="utf-8" />
+        <link href="~/StyleSheet.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="page-content">
+            <h1>Weather</h1>
+            @foreach (CityWeather weather in Model)
+            {
+                <div class="box">
+                    <div>
+                        <h2>@weather.CityName</h2>
+                        <p>@weather.DateAndTime.ToString("HH:mm")</p>
+                    </div>
+                    <div>
+                        <strong>@weather.TemperatureFahrenheit</strong> F
+                    </div>
+                <a href="/weather/@weather.CityUniqueCode">Details</a>
+                </div>
+            }
+        </div>
+    </body>
+</html>
