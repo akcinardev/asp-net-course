@@ -1,13 +1,14 @@
 ﻿@using RazorViews.Models
+@model IEnumerable<Person> // Accessible with Model
 
 @{
 	// string appTitle = "Razor Views Example";
 	// List<Person> people = new List<Person>() {
 	// 	new Person() { Name = "Omer", Birthday = Convert.ToDateTime("1998-07-10") , Gender = Gender.Male},
-	// 	new Person() { Name = "Beyza", Birthday = Convert.ToDateTime("1999-02-11") , Gender = Gender.Female},
-	// 	new Person() { Name = "Isra", Birthday = Convert.ToDateTime("1998-06-15") , Gender = Gender.Female}
+	// 	new Person() { Name = "Jill", Birthday = Convert.ToDateTime("1999-02-02") , Gender = Gender.Female},
+	// 	new Person() { Name = "Claire", Birthday = Convert.ToDateTime("1998-01-10") , Gender = Gender.Female}
 	// };
-	List<Person>? people = ((List<Person>?)ViewData["people"]);
+	// List<Person>? people = ((List<Person>?)ViewData["people"]);
 }
 
 <!DOCTYPE html>
@@ -19,32 +20,29 @@
 </head>
 <body>
 	<div class="page-content">
-
+		<h1>Welcome</h1>
+		@foreach (Person person in Model)
+		{
+			<div class="box float-left">
+				<h3>@person.Name</h3>
+				<table class="table w-100">
+					<tbody>
+						<tr>
+							<td>Gender</td>
+							<td>@person.Gender</td>
+						</tr>
+						<tr>
+							<td>Birthday</td>
+							<td>@person.Birthday.Value.ToString("dd/MM/yyyy")</td>
+						</tr>
+					</tbody>
+				</table>
+				<a href="/details/@person.Name">Details</a>
+				<div>
+					<a href="/person-product">Person with Product</a>
+				</div>
+			</div>
+		}
 	</div>
-	<h1>Welcome</h1>
-	@foreach(Person person in people) {
-		<p>Hi to @person.Name</p>
-	}
-	@* <h2>Current User: @person.Name</h2>
-
-	@if(person.Birthday.HasValue) {
-		double age = Math.Round((DateTime.Now - person.Birthday).Value.TotalDays / 365.25);
-		<h3>@age years old</h3>
-	}
-	else {
-		<p>Birthday is not available</p>
-	}
-
-	@switch(person.Gender){
-		case Gender.Male:
-			<p>Gender: Male</p>
-			;
-			break;
-
-		case Gender.Female:
-			<p>Gender: Female</p>
-			;
-			break;
-	} *@
 </body>
 </html>

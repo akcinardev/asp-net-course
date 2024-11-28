@@ -1,0 +1,30 @@
+﻿@using RazorViews.Models
+@model Person
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Details</title>
+        <meta charset="utf-8"/>
+        <link href="~/StyleSheet.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="page-content">
+            <h1>Person Details</h1>
+            <h3>@Model.Name</h3>
+			<table class="table w-100">
+				<tbody>
+					<tr>
+						<td>Gender</td>
+						<td>@Model.Gender</td>
+					</tr>
+					<tr>
+						<td>Birthday</td>
+						<td>@Model.Birthday?.ToString("dd/MM/yyyy")</td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="/">Back to home</a>
+        </div>
+    </body>
+</html>

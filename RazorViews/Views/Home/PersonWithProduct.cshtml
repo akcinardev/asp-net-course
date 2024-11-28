@@ -1,0 +1,26 @@
+﻿@using RazorViews.Models
+@model PersonProductWrapper
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Person Product</title>
+	<meta charset="utf-8" />
+	<link href="~/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="page-content">
+		<h1>Person with Product</h1>
+
+		<div class="box w-100">
+			<h3>Person</h3>
+			<h4>@Model.PersonData.Name</h4>
+		</div>
+
+		<div class="box w-100">
+			<h3>Product</h3>
+			<h4>@Model.ProductData.Name</h4>
+		</div>
+	</div>
+</body>
+</html>
