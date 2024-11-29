@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIExampleServices", "DIExam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayoutViewsExample", "LayoutViewsExample\LayoutViewsExample.csproj", "{BA56055D-523F-42C7-A3DD-9CAD9842F497}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIExampleContracts", "DIExampleContracts\DIExampleContracts.csproj", "{960A56CF-DBD8-408F-AE19-5B9E3E09CEF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{BA56055D-523F-42C7-A3DD-9CAD9842F497}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA56055D-523F-42C7-A3DD-9CAD9842F497}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA56055D-523F-42C7-A3DD-9CAD9842F497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{960A56CF-DBD8-408F-AE19-5B9E3E09CEF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{960A56CF-DBD8-408F-AE19-5B9E3E09CEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{960A56CF-DBD8-408F-AE19-5B9E3E09CEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{960A56CF-DBD8-408F-AE19-5B9E3E09CEF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
