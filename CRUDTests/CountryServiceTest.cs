@@ -13,6 +13,7 @@ namespace CRUDTests
             _countryService = new CountryService();
         }
 
+        #region AddCountry
         // When CountryAddRequest is null, it should throw ArgumentNullException
         [Fact]
         public void AddCountry_CountryAddRequestIsNull()
@@ -69,9 +70,51 @@ namespace CRUDTests
 
             // Act
             CountryResponse response = _countryService.AddCountry(request);
+            List<CountryResponse> countryListFromGetAllCountries = _countryService.GetAllCountries();
 
             // Assert
             Assert.True(response.CountryID != Guid.Empty);
+            Assert.Contains(response, countryListFromGetAllCountries);
         }
+        #endregion
+
+        #region GetAllCountries
+        // The list of countries should be empty by default. (before adding any)
+        [Fact]
+        public void GetAllCountries_InitialListEmpty()
+        {
+            // Act
+            List<CountryResponse> actualList = _countryService.GetAllCountries();
+
+            // Assert
+            Assert.Empty(actualList);
+        }
+
+        [Fact]
+        public void GetAllCountries_AddFewCountries()
+        {
+            // Arrange
+            List<CountryAddRequest> countryAddRequests = new List<CountryAddRequest>()
+            {
+                new CountryAddRequest() { CountryName = "Turkey"},
+                new CountryAddRequest() { CountryName = "Germany"}
+            };
+
+            // Act
+            List<CountryResponse> countriesListFromAddCountry = new List<CountryResponse>();
+
+            foreach(CountryAddRequest addRequest in countryAddRequests)
+            {
+                countriesListFromAddCountry.Add(_countryService.AddCountry(addRequest));
+            }
+
+            // Assert
+            List<CountryResponse> actualCountryResponseList = _countryService.GetAllCountries();
+            foreach(CountryResponse expectedCountryResponse in countriesListFromAddCountry)
+            {
+                Assert.Contains(expectedCountryResponse, actualCountryResponseList);
+            }
+        }
+        #endregion
     }
 }

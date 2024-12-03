@@ -9,9 +9,9 @@ namespace CRUDServiceContracts.DTO
     {
         public string? CountryName { get; set; }
 
-        //public Country ToCountry()
-        //{
-
-        //}
+        public Country ToCountry()
+        {
+            return new Country { CountryName = CountryName };
+        }
     }
 }
