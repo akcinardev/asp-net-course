@@ -19,5 +19,12 @@ namespace CRUDServiceContracts
         /// </summary>
         /// <returns>All countries as a list.</returns>
         List<CountryResponse> GetAllCountries();
+
+        /// <summary>
+        /// Gets a Country object based on given CountryID.
+        /// </summary>
+        /// <param name="countryID">CountryID to search</param>
+        /// <returns>Matching country as CountryResponse object.</returns>
+        CountryResponse? GetCountryByCountryID(Guid? countryID);
     }
 }
