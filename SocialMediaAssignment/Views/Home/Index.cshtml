@@ -1,0 +1,12 @@
+﻿@{
+	ViewBag.Title = "Home";
+}
+
+<h1>Social Media Links</h1>
+
+<a href="@ViewBag.Facebook">Facebook</a>
+<environment exclude="Development">
+	<a href="@ViewBag.Instagram">Instagram</a>
+</environment>
+<a href="@ViewBag.YouTube">YouTube</a>
+<a href="@ViewBag.Twitter">Twitter</a>

@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationExample", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksAppExample", "StocksAppExample\StocksAppExample.csproj", "{60C673F9-7E4B-45AD-8E73-7B8484E0CEE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaAssignment", "SocialMediaAssignment\SocialMediaAssignment.csproj", "{33A007FA-BC3B-4FD4-9029-507250309942}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{60C673F9-7E4B-45AD-8E73-7B8484E0CEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60C673F9-7E4B-45AD-8E73-7B8484E0CEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60C673F9-7E4B-45AD-8E73-7B8484E0CEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A007FA-BC3B-4FD4-9029-507250309942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A007FA-BC3B-4FD4-9029-507250309942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A007FA-BC3B-4FD4-9029-507250309942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A007FA-BC3B-4FD4-9029-507250309942}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
