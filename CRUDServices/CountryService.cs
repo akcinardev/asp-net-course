@@ -43,7 +43,13 @@ namespace CRUDServices
 
         public CountryResponse? GetCountryByCountryID(Guid? countryID)
         {
-            throw new NotImplementedException();
+            if(countryID == null) return null;
+
+            Country? countryResponseFromGet = _countries.FirstOrDefault(c => c.CountryID == countryID);
+
+            if(countryResponseFromGet == null) return null;
+
+            return countryResponseFromGet.ToCountryResponse();
         }
     }
 }

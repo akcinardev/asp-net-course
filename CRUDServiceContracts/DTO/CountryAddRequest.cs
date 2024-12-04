@@ -3,7 +3,7 @@
 namespace CRUDServiceContracts.DTO
 {
     /// <summary>
-    /// DTO class for adding a new Class object.
+    /// DTO class for adding a new Country object.
     /// </summary>
     public class CountryAddRequest
     {
