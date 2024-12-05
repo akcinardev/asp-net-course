@@ -1,6 +1,7 @@
 ﻿using CRUDEntities;
 using CRUDServiceContracts;
 using CRUDServiceContracts.DTO;
+using CRUDServices.Helpers;
 
 namespace CRUDServices
 {
@@ -28,7 +29,13 @@ namespace CRUDServices
             if(personAddRequest == null) throw new ArgumentNullException(nameof(personAddRequest));
 
             // Validate all properties of "personAddRequest"
-            if(string.IsNullOrEmpty(personAddRequest.PersonName)) throw new ArgumentException("PersonName can not be blank.");
+            //if(string.IsNullOrEmpty(personAddRequest.PersonName)) throw new ArgumentException("PersonName can not be blank.");
+            //ValidationContext validationContext = new ValidationContext(personAddRequest);
+            //List<ValidationResult> validationResults= new List<ValidationResult>();
+            //bool isValid = Validator.TryValidateObject(personAddRequest, validationContext, validationResults, true);
+
+            //if (!isValid) throw new ArgumentException(validationResults.FirstOrDefault()?.ErrorMessage);
+            ValidationHelper.ModelValidation(personAddRequest);
 
             // Convert personAddRequest from PersonAddRequest type to Person
             Person person = personAddRequest.ToPerson();
@@ -46,6 +53,17 @@ namespace CRUDServices
         public List<PersonResponse> GetAllPersons()
         {
             throw new NotImplementedException();
+        }
+
+        public PersonResponse? GetPersonByPersonID(Guid? personID)
+        {
+            if( personID == null) return null;
+
+            Person? person = _persons.FirstOrDefault(p =>  p.PersonID == personID);
+
+            if (person == null) return null;
+
+            return person.ToPersonResponse();
         }
     }
 }

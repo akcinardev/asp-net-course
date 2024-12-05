@@ -1,5 +1,6 @@
 ﻿using CRUDEntities;
 using CRUDServiceContracts.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace CRUDServiceContracts.DTO
 {
@@ -8,8 +9,13 @@ namespace CRUDServiceContracts.DTO
     /// </summary>
     public class PersonAddRequest
     {
+        [Required(ErrorMessage = "Person name can not be blank.")]
         public string? PersonName { get; set; }
+
+        [Required(ErrorMessage = "Email can not be blank.")]
+        [EmailAddress(ErrorMessage = "Email address should be a valid email address.")]
         public string? Email { get; set; }
+
         public DateTime? DateOfBirth { get; set; }
         public GenderOptions? Gender { get; set; }
         public Guid? CountryID { get; set; }

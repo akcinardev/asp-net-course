@@ -19,5 +19,12 @@ namespace CRUDServiceContracts
         /// </summary>
         /// <returns>All persons as a list.</returns>
         List<PersonResponse> GetAllPersons();
+
+        /// <summary>
+        /// Gets a Person object based on given PersonID.
+        /// </summary>
+        /// <param name="personID">PersonID to search</param>
+        /// <returns>Matching person as PersonResponse object.</returns>
+        PersonResponse? GetPersonByPersonID(Guid? personID);
     }
 }
