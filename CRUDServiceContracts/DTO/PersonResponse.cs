@@ -1,4 +1,5 @@
 ﻿using CRUDEntities;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CRUDServiceContracts.DTO
 {
@@ -40,6 +41,19 @@ namespace CRUDServiceContracts.DTO
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"PersonID: {PersonID},\n" +
+                $"Person Name: {PersonName},\n" +
+                $"Email: {Email},\n" +
+                $"Date of Birth: {DateOfBirth?.ToString("dd MM yyyy")},\n" +
+                $"Gender: {Gender},\n" +
+                $"CountryID: {CountryID},\n" +
+                $"Country: {Country},\n" +
+                $"Address: {Address},\n" +
+                $"ReceiveNewsLetters: {ReceiveNewsLetters},\n";
         }
     }
 

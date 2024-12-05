@@ -2,6 +2,7 @@
 using CRUDServiceContracts.DTO;
 using CRUDServiceContracts.Enums;
 using CRUDServices;
+using Xunit.Abstractions;
 
 namespace CRUDTests
 {
@@ -9,11 +10,13 @@ namespace CRUDTests
     {
         private readonly IPersonService _personService;
         private readonly ICountryService _countryService;
+        private readonly ITestOutputHelper _testOutputHelper;
 
-        public PersonServiceTest()
+        public PersonServiceTest(ITestOutputHelper testOutputHelper)
         {
             _personService = new PersonService();
             _countryService = new CountryService();
+            _testOutputHelper = testOutputHelper;
         }
 
         #region AddPerson
@@ -132,7 +135,7 @@ namespace CRUDTests
             Assert.Empty(personsFromGet);
         }
 
-        //ıt should return all of the added persons
+        //It should return all of the added persons
         [Fact]
         public void GetAllPersons_AddFewPersons()
         {
@@ -183,6 +186,27 @@ namespace CRUDTests
             {
                 PersonResponse personResponse = _personService.AddPerson(personRequest);
                 personResponseListFromAdd.Add(personResponse);
+            }
+
+            _testOutputHelper.WriteLine("Expected: ");
+            foreach(PersonResponse personResponse in personResponseListFromAdd)
+            {
+                _testOutputHelper.WriteLine(personResponse.ToString());
+            }
+
+            //Act
+            List<PersonResponse> personsListFromGet = _personService.GetAllPersons();
+
+            _testOutputHelper.WriteLine("Actual: ");
+            foreach (PersonResponse personResponse in personsListFromGet)
+            {
+                _testOutputHelper.WriteLine(personResponse.ToString());
+            }
+
+            //Assert
+            foreach (PersonResponse personResponseFromAdd in personResponseListFromAdd)
+            {
+                Assert.Contains(personResponseFromAdd, personsListFromGet);
             }
         }
 
