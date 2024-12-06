@@ -26,5 +26,13 @@ namespace CRUDServiceContracts
         /// <param name="personID">PersonID to search</param>
         /// <returns>Matching person as PersonResponse object.</returns>
         PersonResponse? GetPersonByPersonID(Guid? personID);
+
+        /// <summary>
+        /// Get all person objects that matches with the given search field and search string.
+        /// </summary>
+        /// <param name="searchBy">Search field to search.</param>
+        /// <param name="searchString">Search string to search.</param>
+        /// <returns>A list of Person objects that matches with the given search field and search string.</returns>
+        List<PersonResponse> GetFilteredPersons(string searchBy, string? searchString);
     }
 }
