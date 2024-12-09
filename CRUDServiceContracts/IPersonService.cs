@@ -1,4 +1,5 @@
 ﻿using CRUDServiceContracts.DTO;
+using CRUDServiceContracts.Enums;
 
 namespace CRUDServiceContracts
 {
@@ -34,5 +35,14 @@ namespace CRUDServiceContracts
         /// <param name="searchString">Search string to search.</param>
         /// <returns>A list of Person objects that matches with the given search field and search string.</returns>
         List<PersonResponse> GetFilteredPersons(string searchBy, string? searchString);
+
+        /// <summary>
+        /// Sorts all person objects by given property and given order. 
+        /// </summary>
+        /// <param name="allPersons">The list of persons to sort.</param>
+        /// <param name="sortBy">Name of the prop which the persons should be sorted by.</param>
+        /// <param name="sortOrder">Whether ascending ASC or descending DESC</param>
+        /// <returns></returns>
+        List<PersonResponse> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder);
     }
 }
