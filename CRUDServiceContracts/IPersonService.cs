@@ -44,5 +44,19 @@ namespace CRUDServiceContracts
         /// <param name="sortOrder">Whether ascending ASC or descending DESC</param>
         /// <returns></returns>
         List<PersonResponse> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder);
+
+        /// <summary>
+        /// Updates the given Person object.
+        /// </summary>
+        /// <param name="personUpdateRequest">Person details to update.</param>
+        /// <returns>The updated Person object as PersonResponse.</returns>
+        PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest);
+
+        /// <summary>
+        /// Deletes the given Person object.
+        /// </summary>
+        /// <param name="personID">PersonID of the Person you want to delete.</param>
+        /// <returns>True if the delete successfull, otherwise false.</returns>
+        bool DeletePerson(Guid? personID);
     }
 }

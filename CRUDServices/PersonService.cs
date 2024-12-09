@@ -172,5 +172,41 @@ namespace CRUDServices
 
             return sortedPersons.ToList();
         }
+
+        public PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest)
+        {
+            if (personUpdateRequest == null) throw new ArgumentNullException(nameof(personUpdateRequest));
+
+            // validation
+            ValidationHelper.ModelValidation(personUpdateRequest);
+
+            // get matching person obj for updating and check for null
+            Person? matchingPerson = _persons.FirstOrDefault(p => p.PersonID == personUpdateRequest.PersonID);
+            if (matchingPerson == null) throw new ArgumentException("Given person ID does not exist.");
+
+            // update details
+            matchingPerson.PersonName = personUpdateRequest.PersonName;
+            matchingPerson.Email = personUpdateRequest.Email;
+            matchingPerson.DateOfBirth = personUpdateRequest.DateOfBirth;
+            matchingPerson.Gender = personUpdateRequest.Gender.ToString();
+            matchingPerson.CountryID = personUpdateRequest.CountryID;
+            matchingPerson.Address = personUpdateRequest.Address;
+            matchingPerson.ReceiveNewsLetters = personUpdateRequest.ReceiveNewsLetters;
+
+            return matchingPerson.ToPersonResponse();
+        }
+
+        public bool DeletePerson(Guid? personID)
+        {
+            if (personID == null) throw new ArgumentNullException(nameof(personID));
+
+            Person? matchingPerson = _persons.FirstOrDefault(p => p.PersonID == personID);
+
+            if (matchingPerson == null) return false;
+
+            _persons.RemoveAll(p => p.PersonID == personID);
+
+            return true;
+        }
     }
 }

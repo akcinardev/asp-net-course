@@ -1,5 +1,5 @@
 ﻿using CRUDEntities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using CRUDServiceContracts.Enums;
 
 namespace CRUDServiceContracts.DTO
 {
@@ -54,6 +54,21 @@ namespace CRUDServiceContracts.DTO
                 $"Country: {Country},\n" +
                 $"Address: {Address},\n" +
                 $"ReceiveNewsLetters: {ReceiveNewsLetters},\n";
+        }
+
+        public PersonUpdateRequest ToPersonUpdateRequest()
+        {
+            return new PersonUpdateRequest()
+            {
+                PersonID = PersonID,
+                PersonName = PersonName,
+                Email = Email,
+                DateOfBirth = DateOfBirth,
+                Gender = (GenderOptions)Enum.Parse(typeof(GenderOptions), Gender, true),
+                CountryID = CountryID,
+                Address = Address,
+                ReceiveNewsLetters = ReceiveNewsLetters
+            };
         }
     }
 

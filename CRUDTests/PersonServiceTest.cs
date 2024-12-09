@@ -459,5 +459,165 @@ namespace CRUDTests
         }
 
         #endregion
+
+        #region UpdatePerson
+
+        // when you supply null value as PersonUpdateRequest, it should throw ArgumentNullException
+        [Fact]
+        public void UpdatePerson_PersonUpdateRequestIsNull()
+        {
+            // arrange
+            PersonUpdateRequest? personUpdateRequest = null;
+
+            // assert
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                // act
+                _personService.UpdatePerson(personUpdateRequest);
+            });
+        }
+
+        // when you supply invalid value as PersonID, it should throw ArgumentException
+        [Fact]
+        public void UpdatePerson_PersonIDIsInvalid()
+        {
+            // arrange
+            PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { PersonID = Guid.NewGuid() };
+
+            // assert
+            Assert.Throws<ArgumentException>(() =>
+            {
+                // act
+                _personService.UpdatePerson(personUpdateRequest);
+            });
+        }
+
+        // when PersonName is null, it should throw ArgumentException
+        [Fact]
+        public void UpdatePerson_PersonNameIsNull()
+        {
+            // arrange
+            CountryAddRequest countryAddRequest = new CountryAddRequest() {CountryName = "Blackwater"};
+            CountryResponse countryResponse = _countryService.AddCountry(countryAddRequest);
+
+            PersonAddRequest personAddRequest = new PersonAddRequest()
+            {
+                PersonName = "Arthur Morgan",
+                Email = "example@email.com",
+                DateOfBirth = null,
+                Gender = GenderOptions.Male,
+                CountryID = countryResponse.CountryID,
+                Address = "Blackwater Village",
+                ReceiveNewsLetters = false,
+            };
+
+            PersonResponse personAddResponse = _personService.AddPerson(personAddRequest);
+
+            PersonUpdateRequest? personUpdateRequest = personAddResponse.ToPersonUpdateRequest();
+            personUpdateRequest.PersonName = null;
+
+            // assert
+            Assert.Throws<ArgumentException>(() =>
+            {
+                // act
+                _personService.UpdatePerson(personUpdateRequest);
+            });
+        }
+
+        // when PersonName is null, it should throw ArgumentException
+        [Fact]
+        public void UpdatePerson_PersonFullDetailsUpdate()
+        {
+            // arrange
+            CountryAddRequest countryAddRequest = new CountryAddRequest() { CountryName = "Blackwater" };
+            CountryResponse countryResponse = _countryService.AddCountry(countryAddRequest);
+
+            PersonAddRequest personAddRequest = new PersonAddRequest()
+            {
+                PersonName = "Arthur Morgan",
+                Email = "example@email.com",
+                DateOfBirth = null,
+                Gender = GenderOptions.Male,
+                CountryID = countryResponse.CountryID,
+                Address = "Blackwater Village",
+                ReceiveNewsLetters = false,
+            };
+
+            PersonResponse personAddResponse = _personService.AddPerson(personAddRequest);
+
+            PersonUpdateRequest? personUpdateRequest = personAddResponse.ToPersonUpdateRequest();
+
+            personUpdateRequest.PersonName = "John Marston";
+            personUpdateRequest.Address = "Strawberry Village";
+
+            // act
+            PersonResponse personResponseFromUpdate = _personService.UpdatePerson(personUpdateRequest);
+            PersonResponse? personResponseAfterUpdate = _personService.GetPersonByPersonID(personUpdateRequest.PersonID);
+
+            // assert
+            Assert.Equal(personResponseAfterUpdate, personResponseFromUpdate);
+        }
+
+        #endregion
+
+        #region DeletePerson
+
+        // if you supply VALID PersonID, it should return TRUE
+        [Fact]
+        public void DeletePerson_ValidPersonID()
+        {
+            // arrange
+            CountryAddRequest countryAddRequest = new CountryAddRequest() { CountryName = "Blackwater" };
+            CountryResponse countryResponse = _countryService.AddCountry(countryAddRequest);
+
+            PersonAddRequest personAddRequest = new PersonAddRequest()
+            {
+                PersonName = "Arthur Morgan",
+                Email = "example@email.com",
+                DateOfBirth = null,
+                Gender = GenderOptions.Male,
+                CountryID = countryResponse.CountryID,
+                Address = "Blackwater Village",
+                ReceiveNewsLetters = false,
+            };
+
+            PersonResponse personAddResponse = _personService.AddPerson(personAddRequest);
+
+            // act
+            bool isDeleted = _personService.DeletePerson(personAddResponse.PersonID);
+
+            // assert
+            Assert.True(isDeleted);
+        }
+
+        // if you supply INVALID PersonID, it should return FALSE
+        [Fact]
+        public void DeletePerson_InvalidPersonID()
+        {
+            // arrange
+            CountryAddRequest countryAddRequest = new CountryAddRequest() { CountryName = "Blackwater" };
+            CountryResponse countryResponse = _countryService.AddCountry(countryAddRequest);
+
+            PersonAddRequest personAddRequest = new PersonAddRequest()
+            {
+                PersonName = "Arthur Morgan",
+                Email = "example@email.com",
+                DateOfBirth = null,
+                Gender = GenderOptions.Male,
+                CountryID = countryResponse.CountryID,
+                Address = "Blackwater Village",
+                ReceiveNewsLetters = false,
+            };
+
+            PersonResponse personAddResponse = _personService.AddPerson(personAddRequest);
+
+            // act
+            bool isDeleted = _personService.DeletePerson(Guid.NewGuid());
+
+            // assert
+            Assert.False(isDeleted);
+        }
+
+        #endregion
     }
 }
