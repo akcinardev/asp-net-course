@@ -6,4 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CRUDEntities\CRUDEntities.csproj" />
+    <ProjectReference Include="..\CRUDServiceContracts\CRUDServiceContracts.csproj" />
+    <ProjectReference Include="..\CRUDServices\CRUDServices.csproj" />
+  </ItemGroup>
+
 </Project>

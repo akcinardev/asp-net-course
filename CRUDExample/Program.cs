@@ -1,3 +1,6 @@
+using CRUDServiceContracts;
+using CRUDServices;
+
 namespace CRUDExample
 {
     public class Program
@@ -7,6 +10,9 @@ namespace CRUDExample
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
+            // Add Services
+            builder.Services.AddSingleton<ICountryService, CountryService>();
+            builder.Services.AddSingleton<IPersonService, PersonService>();
 
             var app = builder.Build();
 
