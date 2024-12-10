@@ -34,28 +34,59 @@
 	<table class="table w-100 mt">
 		<thead>
 			<tr>
-				<th>Person Name</th>
-				<th>Email</th>
-				<th>Birth Date</th>
-				<th>Age</th>
-				<th>Gender</th>
-				<th>Country</th>
-				<th>Address</th>
-				<th>Receive News Letters?</th>
+				@await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData) {
+					{"ColumnName", nameof(PersonResponse.PersonName)},
+					{"DisplayName", "Person Name"},
+				})
+
+				@await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData) {
+					{"ColumnName", nameof(PersonResponse.Email)},
+					{"DisplayName", "Email"},
+				})
+
+				@await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData) {
+					{"ColumnName", nameof(PersonResponse.DateOfBirth)},
+					{"DisplayName", "Birth Date"},
+				})
+
+				@await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData) {
+					{"ColumnName", nameof(PersonResponse.Age)},
+					{"DisplayName", "Age"},
+				})
+
+				@await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData) {
+					{"ColumnName", nameof(PersonResponse.Gender)},
+					{"DisplayName", "Gender"},
+				})
+
+				@await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData) {
+					{"ColumnName", nameof(PersonResponse.Country)},
+					{"DisplayName", "Country"},
+				})
+
+				@await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData) {
+					{"ColumnName", nameof(PersonResponse.Address)},
+					{"DisplayName", "Address"},
+				})
+
+				@await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData) {
+					{"ColumnName", nameof(PersonResponse.ReceiveNewsLetters)},
+					{"DisplayName", "Receive News Letters?"},
+				})
 			</tr>
 		</thead>
 		<tbody>
 			@foreach(PersonResponse person in Model)
 			{
 				<tr>
-					<td>@person.PersonName</td>
-					<td>@person.Email</td>
-					<td>@person.DateOfBirth?.ToString("dd MMMM yyyy")</td>
-					<td>@person.Age</td>
-					<td>@person.Gender</td>
-					<td>@person.Country</td>
-					<td>@person.Address</td>
-					<td>@person.ReceiveNewsLetters</td>
+					<td style="width:13%">@person.PersonName</td>
+					<td style="width:15%">@person.Email</td>
+					<td style="width:10%">@person.DateOfBirth?.ToString("dd MMMM yyyy")</td>
+					<td style="width:7%">@person.Age</td>
+					<td style="width:10%">@person.Gender</td>
+					<td style="width:10%">@person.Country</td>
+					<td style="width:15%">@person.Address</td>
+					<td style="width:15%">@person.ReceiveNewsLetters</td>
 				</tr>
 			}
 		</tbody>

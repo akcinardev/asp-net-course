@@ -1,5 +1,6 @@
 ﻿using CRUDServiceContracts;
 using CRUDServiceContracts.DTO;
+using CRUDServiceContracts.Enums;
 using CRUDServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,8 +19,14 @@ namespace CRUDExample.Controllers
 
         [Route("/")]
         [Route("/persons/index")]
-        public IActionResult Index(string searchBy, string? searchString)
+        public IActionResult Index(
+            string searchBy,
+            string? searchString,
+            string sortBy = nameof(PersonResponse.PersonName),
+            SortOrderOptions sortOrder = SortOrderOptions.ASC
+            )
         {
+            // searching
             ViewBag.SearchFields = new Dictionary<string, string>()
             {
                 {nameof(PersonResponse.PersonName), "Person Name" },
@@ -36,7 +43,13 @@ namespace CRUDExample.Controllers
             //List<PersonResponse> persons = _personService.GetAllPersons();
             List<PersonResponse> persons = _personService.GetFilteredPersons(searchBy, searchString);
 
-            return View(persons);
+
+            // sorting
+            List<PersonResponse> sortedPersons = _personService.GetSortedPersons(persons, sortBy, sortOrder);
+            ViewBag.CurrentSortBy = sortBy;
+            ViewBag.CurrentSortOrder = sortOrder.ToString();
+
+            return View(sortedPersons);
         }
     }
 }

@@ -171,7 +171,7 @@ namespace CRUDServices
 
         public List<PersonResponse> GetAllPersons()
         {
-            return _persons.Select(p => p.ToPersonResponse()).ToList();
+            return _persons.Select(p => ConvertPersonToPersonResponse(p)).ToList();
         }
 
         public PersonResponse? GetPersonByPersonID(Guid? personID)
@@ -182,7 +182,7 @@ namespace CRUDServices
 
             if (person == null) return null;
 
-            return person.ToPersonResponse();
+            return ConvertPersonToPersonResponse(person);
         }
 
         public List<PersonResponse> GetFilteredPersons(string searchBy, string? searchString)
@@ -310,7 +310,7 @@ namespace CRUDServices
             matchingPerson.Address = personUpdateRequest.Address;
             matchingPerson.ReceiveNewsLetters = personUpdateRequest.ReceiveNewsLetters;
 
-            return matchingPerson.ToPersonResponse();
+            return ConvertPersonToPersonResponse(matchingPerson);
         }
 
         public bool DeletePerson(Guid? personID)
