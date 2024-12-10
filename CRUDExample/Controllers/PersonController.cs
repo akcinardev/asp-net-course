@@ -23,8 +23,7 @@ namespace CRUDExample.Controllers
             string searchBy,
             string? searchString,
             string sortBy = nameof(PersonResponse.PersonName),
-            SortOrderOptions sortOrder = SortOrderOptions.ASC
-            )
+            SortOrderOptions sortOrder = SortOrderOptions.ASC)
         {
             // searching
             ViewBag.SearchFields = new Dictionary<string, string>()
@@ -50,6 +49,16 @@ namespace CRUDExample.Controllers
             ViewBag.CurrentSortOrder = sortOrder.ToString();
 
             return View(sortedPersons);
+        }
+
+        [Route("/persons/create")]
+        [HttpGet]
+        public IActionResult Create()
+        {
+            List<CountryResponse> countries = _countryService.GetAllCountries();
+            ViewBag.Countries = countries;
+
+            return View();
         }
     }
 }
