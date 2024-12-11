@@ -6,7 +6,7 @@
 <h2>Create Person</h2>
 
 <div class="w-50">
-	<form action="ü/persons/create" method="post">
+	<form action="/persons/create" method="post">
 		@* PersonName *@
 		<div class="form-field flex">
 			<div class="w-25">
@@ -43,9 +43,9 @@
 				<label class="form-label">Gender</label>
 			</div>
 			<div class="flex-1">
-				<input type="radio" name="Gender" id="Male" value="Male" />
+				<input type="radio" name="Gender" id="Male" value="Male" class="ml"/>
 				<label for="Male">Male</label>
-				<input type="radio" name="Gender" id="Female" value="Female" />
+				<input type="radio" name="Gender" id="Female" value="Female" class="ml"/>
 				<label for="Female">Female</label>
 			</div>
 		</div>
@@ -57,11 +57,51 @@
 			</div>
 			<div class="flex-1">
 				<select name="CountryID" id="CountryID" class="form-input">
+					<option value="">Select Country</option>
 					@foreach (CountryResponse country in ViewBag.Countries)
 					{
 						<option value="@country.CountryID">@country.CountryName</option>
 					}
 				</select>
+			</div>
+		</div>
+
+		@* Address *@
+		<div class="form-field flex">
+			<div class="w-25">
+				<label for="Address" class="form-label pt">Address</label>
+			</div>
+			<div class="flex-1">
+				<textarea id="Address" name="Address" class="form-input"></textarea>
+			</div>
+		</div>
+
+		@* ReceiveNewsLetters *@
+		<div class="form-field flex">
+			<div class="w-25">
+			</div>
+			<div class="flex-1">
+				<input type="checkbox" name="ReceiveNewsLetters" id="ReceiveNewsLetters" value="true" />
+				<label for="ReceiveNewsLetters" class="form-label">Approve to receive news letters?</label>
+			</div>
+		</div>
+
+		@* Submit *@
+		<div class="form-field flex">
+			<div class="w-25">
+			</div>
+			<div class="flex-1">
+				<button class="button button-green-back">Create</button>
+
+				@if (ViewBag.Errors != null){
+					<div>
+						<ul>
+							@foreach (string error in ViewBag.Errors){
+								<li class="ml">@error</li>
+							}
+						</ul>
+					</div>
+				}
 			</div>
 		</div>
 	</form>
