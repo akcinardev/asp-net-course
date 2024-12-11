@@ -1,11 +1,11 @@
 ﻿using CRUDServiceContracts;
 using CRUDServiceContracts.DTO;
 using CRUDServiceContracts.Enums;
-using CRUDServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRUDExample.Controllers
 {
+    [Route("persons")]
     public class PersonController : Controller
     {
         private readonly IPersonService _personService;
@@ -18,7 +18,7 @@ namespace CRUDExample.Controllers
         }
 
         [Route("/")]
-        [Route("/persons/index")]
+        [Route("index")]
         public IActionResult Index(
             string searchBy,
             string? searchString,
@@ -51,7 +51,7 @@ namespace CRUDExample.Controllers
             return View(sortedPersons);
         }
 
-        [Route("/persons/create")]
+        [Route("create")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -61,7 +61,7 @@ namespace CRUDExample.Controllers
             return View();
         }
 
-        [Route("/persons/create")]
+        [Route("create")]
         [HttpPost]
         public IActionResult Create(PersonAddRequest personAddRequest)
         {
@@ -69,7 +69,7 @@ namespace CRUDExample.Controllers
             {
                 List<CountryResponse> countries = _countryService.GetAllCountries();
                 ViewBag.Countries = countries;
-                ViewBag.Errors = ModelState.Values.SelectMany(v=>v.Errors).SelectMany(e => e.ErrorMessage).ToList();
+                ViewBag.Errors = ModelState.Values.SelectMany(v=>v.Errors).Select(e => e.ErrorMessage).ToList();
                 return View();
             }
 
