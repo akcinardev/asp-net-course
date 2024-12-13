@@ -14,8 +14,10 @@ namespace CRUDServiceContracts.DTO
 
         [Required(ErrorMessage = "Email can not be blank.")]
         [EmailAddress(ErrorMessage = "Email address should be a valid email address.")]
+        [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
         public GenderOptions? Gender { get; set; }
         public Guid? CountryID { get; set; }
