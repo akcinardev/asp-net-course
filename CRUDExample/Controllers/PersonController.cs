@@ -2,6 +2,7 @@
 using CRUDServiceContracts.DTO;
 using CRUDServiceContracts.Enums;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CRUDExample.Controllers
 {
@@ -56,7 +57,7 @@ namespace CRUDExample.Controllers
         public IActionResult Create()
         {
             List<CountryResponse> countries = _countryService.GetAllCountries();
-            ViewBag.Countries = countries;
+            ViewBag.Countries = countries.Select(c => new SelectListItem() { Text = c.CountryName, Value = c.CountryID.ToString()});
 
             return View();
         }

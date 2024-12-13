@@ -14,7 +14,7 @@
 		@* PersonName *@
 		<div class="form-field flex">
 			<div class="w-25">
-				<label for="PersonName" class="form-label pt">Person Name</label>
+				<label asp-for="PersonName" class="form-label pt">Person Name</label>
 			</div>
 			<div class="flex-1">
 				@* <input type="text" id="PersonName" name="PersonName" class="form-input" /> *@
@@ -25,7 +25,7 @@
 		@* Email *@
 		<div class="form-field flex">
 			<div class="w-25">
-				<label for="Email" class="form-label pt">Email</label>
+				<label asp-for="Email" class="form-label pt">Email</label>
 			</div>
 			<div class="flex-1">
 				@* <input type="text" id="Email" name="Email" class="form-input" /> *@
@@ -36,7 +36,7 @@
 		@* DateOfBirth *@
 		<div class="form-field flex">
 			<div class="w-25">
-				<label for="DateOfBirth" class="form-label">Date of Birth</label>
+				<label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
 			</div>
 			<div class="flex-1">
 				@* <input type="date" id="DateOfBirth" name="DateOfBirth" class="form-input" /> *@
@@ -65,16 +65,16 @@
 		@* Country *@
 		<div class="form-field flex">
 			<div class="w-25">
-				<label for="Country" class="form-label">Country</label>
+				<label asp-for="CountryID" class="form-label">Country</label>
 			</div>
 			<div class="flex-1">
 				@* <select name="CountryID" id="CountryID" class="form-input"> *@
-				<select asp-for="CountryID" class="form-input">
+				<select asp-for="CountryID" asp-items="@ViewBag.Countries" class="form-input">
 					<option value="">Select Country</option>
-					@foreach (CountryResponse country in ViewBag.Countries)
+					@* @foreach (CountryResponse country in ViewBag.Countries)
 					{
 						<option value="@country.CountryID">@country.CountryName</option>
-					}
+					} *@
 				</select>
 			</div>
 		</div>
@@ -82,7 +82,7 @@
 		@* Address *@
 		<div class="form-field flex">
 			<div class="w-25">
-				<label for="Address" class="form-label pt">Address</label>
+				<label asp-for="Address" class="form-label pt">Address</label>
 			</div>
 			<div class="flex-1">
 				@* <textarea id="Address" name="Address" class="form-input"></textarea> *@
@@ -97,7 +97,7 @@
 			<div class="flex-1">
 				@* <input type="checkbox" name="ReceiveNewsLetters" id="ReceiveNewsLetters" value="true" /> *@
 				<input asp-for="ReceiveNewsLetters" value="true" />
-				<label for="ReceiveNewsLetters" class="form-label">Approve to receive news letters?</label>
+				<label asp-for="ReceiveNewsLetters" class="form-label">Approve to receive news letters?</label>
 			</div>
 		</div>
 
