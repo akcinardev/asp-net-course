@@ -84,7 +84,6 @@ namespace CRUDExample.Controllers
         public IActionResult Edit(Guid personID)
         {
             PersonResponse? personResponse = _personService.GetPersonByPersonID(personID);
-
             if (personResponse == null) return RedirectToAction("Index", "Person");
 
             PersonUpdateRequest personUpdateRequest = personResponse.ToPersonUpdateRequest();
@@ -113,6 +112,27 @@ namespace CRUDExample.Controllers
                 ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
                 return View();
             }
+        }
+
+        [Route("[action]/{personID}")]
+        [HttpGet]
+        public IActionResult Delete(Guid personID)
+        {
+            PersonResponse? personResponse = _personService.GetPersonByPersonID(personID);
+            if (personResponse == null) return RedirectToAction("Index", "Person");
+
+            return View(personResponse);
+        }
+
+        [Route("[action]/{personID}")]
+        [HttpPost]
+        public IActionResult Delete(PersonUpdateRequest personUpdateResult)
+        {
+            PersonResponse? personResponse = _personService.GetPersonByPersonID(personUpdateResult.PersonID);
+            if (personResponse == null) return RedirectToAction("Index", "Person");
+
+            _personService.DeletePerson(personUpdateResult.PersonID);
+            return RedirectToAction("Index", "Person");
         }
     }
 }
