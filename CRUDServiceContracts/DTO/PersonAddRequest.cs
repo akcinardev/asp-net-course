@@ -19,9 +19,15 @@ namespace CRUDServiceContracts.DTO
 
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
+
+        [Required(ErrorMessage = "Please select a gender.")]
         public GenderOptions? Gender { get; set; }
+
+        [Required(ErrorMessage = "Please select a country from the list.")]
         public Guid? CountryID { get; set; }
+
         public string? Address { get; set; }
+
         public bool ReceiveNewsLetters { get; set; }
 
         /// <summary>
