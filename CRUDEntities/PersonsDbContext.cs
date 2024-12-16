@@ -27,5 +27,10 @@ namespace CRUDEntities
             List<Person> persons = JsonSerializer.Deserialize<List<Person>>(personsJson);
             modelBuilder.Entity<Person>().HasData(persons);
         }
+
+        public List<Person> sp_GetAllPersons()
+        {
+            return Persons.FromSqlRaw("EXECUTE [dbo].[GetAllPersons]").ToList();
+        }
     }
 }

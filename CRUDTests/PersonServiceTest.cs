@@ -3,6 +3,7 @@ using CRUDServiceContracts;
 using CRUDServiceContracts.DTO;
 using CRUDServiceContracts.Enums;
 using CRUDServices;
+using Microsoft.EntityFrameworkCore;
 using Xunit.Abstractions;
 
 namespace CRUDTests
@@ -15,8 +16,8 @@ namespace CRUDTests
 
         public PersonServiceTest(ITestOutputHelper testOutputHelper)
         {
-            _personService = new PersonService(false);
-            _countryService = new CountryService(false);
+            _countryService = new CountryService(new PersonsDbContext(new DbContextOptionsBuilder<PersonsDbContext>().Options));
+            _personService = new PersonService(new PersonsDbContext(new DbContextOptionsBuilder<PersonsDbContext>().Options), _countryService);
             _testOutputHelper = testOutputHelper;
         }
 

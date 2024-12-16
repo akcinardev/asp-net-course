@@ -56,8 +56,9 @@ namespace CRUDServices
         public List<PersonResponse> GetAllPersons()
         {
             //return _db.Persons.Select(p => ConvertPersonToPersonResponse(p)).ToList();  // Tries to translate the method and gives error. Dont use classes or methods in LINQ
-            return _db.Persons.ToList().Select(p => ConvertPersonToPersonResponse(p)).ToList();     // First gets the data from db as a list and then we can implement convert method on that
+            //return _db.Persons.ToList().Select(p => ConvertPersonToPersonResponse(p)).ToList();     // First gets the data from db as a list and then we can implement convert method on that
                                                                                                     // not directly inside of LINQ query
+            return _db.sp_GetAllPersons().Select(p => ConvertPersonToPersonResponse(p)).ToList(); // with stored procedures
         }
 
         public PersonResponse? GetPersonByPersonID(Guid? personID)
