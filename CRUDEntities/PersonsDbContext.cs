@@ -5,6 +5,8 @@ namespace CRUDEntities
 {
     public class PersonsDbContext : DbContext
     {
+        public PersonsDbContext(DbContextOptions options) : base(options){}
+
         public DbSet<Country> Countries { get; set; }
         public DbSet<Person> Persons { get; set; }
 
@@ -21,9 +23,9 @@ namespace CRUDEntities
             modelBuilder.Entity<Country>().HasData(countries);
 
             // Seed Data to Persons
-            string personsJson = File.ReadAllText("countries.json");
+            string personsJson = File.ReadAllText("persons.json");
             List<Person> persons = JsonSerializer.Deserialize<List<Person>>(personsJson);
-            modelBuilder.Entity<Country>().HasData(persons);
+            modelBuilder.Entity<Person>().HasData(persons);
         }
     }
 }
