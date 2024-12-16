@@ -46,8 +46,9 @@ namespace CRUDServices
             person.PersonID = Guid.NewGuid();
 
             // Add it to the List<Person>
-            _db.Persons.Add(person);
-            _db.SaveChanges();
+            //_db.Persons.Add(person);
+            //_db.SaveChanges();
+            _db.sp_InsertPerson(person);
 
             // Convert the Person into PersonResponse and return with PersonID
             return ConvertPersonToPersonResponse(person);
