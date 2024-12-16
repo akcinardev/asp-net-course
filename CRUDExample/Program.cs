@@ -13,8 +13,8 @@ namespace CRUDExample
 
             builder.Services.AddControllersWithViews();
             // Add Services
-            builder.Services.AddSingleton<ICountryService, CountryService>();
-            builder.Services.AddSingleton<IPersonService, PersonService>();
+            builder.Services.AddScoped<ICountryService, CountryService>();
+            builder.Services.AddScoped<IPersonService, PersonService>();
 
             builder.Services.AddDbContext<PersonsDbContext>(options =>
             {
