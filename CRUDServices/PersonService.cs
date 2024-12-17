@@ -46,9 +46,9 @@ namespace CRUDServices
             person.PersonID = Guid.NewGuid();
 
             // Add it to the List<Person>
-            //_db.Persons.Add(person);
-            //_db.SaveChanges();
-            _db.sp_InsertPerson(person);
+            _db.Persons.Add(person);
+            _db.SaveChanges();
+            //_db.sp_InsertPerson(person); // STORED PROCEDURE
 
             // Convert the Person into PersonResponse and return with PersonID
             return ConvertPersonToPersonResponse(person);
@@ -56,10 +56,15 @@ namespace CRUDServices
 
         public List<PersonResponse> GetAllPersons()
         {
-            //return _db.Persons.Select(p => ConvertPersonToPersonResponse(p)).ToList();  // Tries to translate the method and gives error. Dont use classes or methods in LINQ
-            //return _db.Persons.ToList().Select(p => ConvertPersonToPersonResponse(p)).ToList();     // First gets the data from db as a list and then we can implement convert method on that
-                                                                                                    // not directly inside of LINQ query
-            return _db.sp_GetAllPersons().Select(p => ConvertPersonToPersonResponse(p)).ToList(); // with stored procedures
+            // Tries to translate the method and gives error. Dont use classes or methods in LINQ
+            //return _db.Persons.Select(p => ConvertPersonToPersonResponse(p)).ToList();
+
+            // First gets the data from db as a list and then we can implement convert method on that
+            // not directly inside of LINQ query
+            return _db.Persons.ToList().Select(p => ConvertPersonToPersonResponse(p)).ToList();
+
+            // with stored procedures
+            //return _db.sp_GetAllPersons().Select(p => ConvertPersonToPersonResponse(p)).ToList();
         }
 
         public PersonResponse? GetPersonByPersonID(Guid? personID)
