@@ -4,6 +4,7 @@ using CRUDEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRUDEntities.Migrations
 {
     [DbContext(typeof(PersonsDbContext))]
-    partial class PersonsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241217121944_TINColumn")]
+    partial class TINColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,17 +98,11 @@ namespace CRUDEntities.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("TIN")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("varchar(8)")
-                        .HasDefaultValue("ABC12345")
-                        .HasColumnName("TaxIdentificationNumber");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PersonID");
 
-                    b.ToTable("Persons", null, t =>
-                        {
-                            t.HasCheckConstraint("CHECK_TIN", "len([TaxIdentificationNumber]) = 8");
-                        });
+                    b.ToTable("Persons", (string)null);
 
                     b.HasData(
                         new

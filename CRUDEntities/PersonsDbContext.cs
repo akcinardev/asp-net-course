@@ -27,13 +27,30 @@ namespace CRUDEntities
             string personsJson = File.ReadAllText("persons.json");
             List<Person> persons = JsonSerializer.Deserialize<List<Person>>(personsJson);
             modelBuilder.Entity<Person>().HasData(persons);
+
+            // Fluent API
+            modelBuilder.Entity<Person>().Property(p => p.TIN)
+                .HasColumnName("TaxIdentificationNumber")
+                .HasColumnType("varchar(8)")
+                .HasDefaultValue("ABC12345");
+
+            //modelBuilder.Entity<Person>()
+            //    .HasIndex(p => p.TIN).IsUnique();
+
+            // OBSOLETE
+            //modelBuilder.Entity<Person>()
+            //    .HasCheckConstraint("CHECK_TIN", "len([TIN]) = 8");
+
+            modelBuilder.Entity<Person>().ToTable(p => p.HasCheckConstraint("CHECK_TIN", "len([TaxIdentificationNumber]) = 8"));
         }
 
+        // Stored Procs for Getting all Persons
         public List<Person> sp_GetAllPersons()
         {
             return Persons.FromSqlRaw("EXECUTE [dbo].[GetAllPersons]").ToList();
         }
 
+        // Stored Procs for Inserting a new Person
         public int sp_InsertPerson(Person person)
         {
             SqlParameter[] parameters = new SqlParameter[]

@@ -8,6 +8,7 @@ namespace CRUDEntities
     public class Person
     {
         [Key]
+        //[Required]
         public Guid PersonID { get; set; }
 
         [StringLength(40)] //nvarchar(40)
@@ -29,5 +30,7 @@ namespace CRUDEntities
 
         //bit
         public bool ReceiveNewsLetters { get; set; }
+
+        public string? TIN { get; set; }
     }
 }
