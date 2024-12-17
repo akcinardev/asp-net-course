@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRUDEntities
 {
@@ -32,5 +33,8 @@ namespace CRUDEntities
         public bool ReceiveNewsLetters { get; set; }
 
         public string? TIN { get; set; }
+
+        [ForeignKey("CountryID")]
+        public virtual Country? Country { get; set; }
     }
 }

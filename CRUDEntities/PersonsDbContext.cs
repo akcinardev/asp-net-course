@@ -42,6 +42,14 @@ namespace CRUDEntities
             //    .HasCheckConstraint("CHECK_TIN", "len([TIN]) = 8");
 
             modelBuilder.Entity<Person>().ToTable(p => p.HasCheckConstraint("CHECK_TIN", "len([TaxIdentificationNumber]) = 8"));
+
+            // Table Relations
+            //modelBuilder.Entity<Person>(p =>
+            //{
+            //    p.HasOne<Country>(c => c.Country)
+            //    .WithMany(p => p.Persons)
+            //    .HasForeignKey(p => p.CountryID);
+            //});
         }
 
         // Stored Procs for Getting all Persons
