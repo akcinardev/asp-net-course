@@ -2,6 +2,7 @@ using CRUDEntities;
 using CRUDServiceContracts;
 using CRUDServices;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 
 namespace CRUDExample
 {
@@ -31,6 +32,7 @@ namespace CRUDExample
             app.UseStaticFiles();
             app.UseRouting();
             app.MapControllers();
+            app.UseRotativa();
 
             app.Run();
         }
