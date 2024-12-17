@@ -13,13 +13,13 @@ namespace CRUDServices
         private readonly PersonsDbContext _db;
         private readonly ICountryService _countryService;
 
-        public PersonService(PersonsDbContext personsDbContext, ICountryService countryService)
+        public PersonService (PersonsDbContext personsDbContext, ICountryService countryService)
         {
             _db = personsDbContext;
             _countryService = countryService;
         }
 
-        public PersonResponse AddPerson(PersonAddRequest? personAddRequest)
+        public async Task<PersonResponse> AddPerson(PersonAddRequest? personAddRequest)
         {
             // Check if "personAddRequest" is null
             if(personAddRequest == null) throw new ArgumentNullException(nameof(personAddRequest));
@@ -41,42 +41,43 @@ namespace CRUDServices
 
             // Add it to the List<Person>
             _db.Persons.Add(person);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             //_db.sp_InsertPerson(person); // STORED PROCEDURE
 
             // Convert the Person into PersonResponse and return with PersonID
             return person.ToPersonResponse();
         }
 
-        public List<PersonResponse> GetAllPersons()
+        public async Task<List<PersonResponse>> GetAllPersons()
         {
             // Tries to translate the method and gives error. Dont use classes or methods in LINQ
             //return _db.Persons.Select(p => ConvertPersonToPersonResponse(p)).ToList();
 
             // First gets the data from db as a list and then we can implement convert method on that
             // not directly inside of LINQ query
-            var persons = _db.Persons.Include("Country").ToList();
-            return _db.Persons.ToList().Select(p => p.ToPersonResponse()).ToList();
+            var persons = await _db.Persons.Include("Country").ToListAsync();
+
+            return persons.Select(p => p.ToPersonResponse()).ToList();
 
             // with stored procedures
             //return _db.sp_GetAllPersons().Select(p => ConvertPersonToPersonResponse(p)).ToList();
         }
 
-        public PersonResponse? GetPersonByPersonID(Guid? personID)
+        public async Task<PersonResponse?> GetPersonByPersonID(Guid? personID)
         {
             if( personID == null) return null;
 
-            Person? person = _db.Persons.Include("Country").FirstOrDefault(p =>  p.PersonID == personID);
+            Person? person = await _db.Persons.Include("Country").FirstOrDefaultAsync(p =>  p.PersonID == personID);
 
             if (person == null) return null;
 
             return person.ToPersonResponse();
         }
 
-        public List<PersonResponse> GetFilteredPersons(string searchBy, string? searchString)
+        public async Task<List<PersonResponse>> GetFilteredPersons(string searchBy, string? searchString)
         {
             // Get all persons into a list
-            List<PersonResponse> allPersons = GetAllPersons();
+            List<PersonResponse> allPersons = await GetAllPersons();
 
             // Assign all persons to the matchingPersons as default
             List<PersonResponse> matchingPersons = allPersons;
@@ -125,7 +126,7 @@ namespace CRUDServices
             return matchingPersons;
         }
 
-        public List<PersonResponse> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder) // GetSortedPersons LOGIC WITH REFLECTIONS
+        public async Task<List<PersonResponse>> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder) // GetSortedPersons LOGIC WITH REFLECTIONS
         {
             if (string.IsNullOrEmpty(sortBy)) return allPersons;
 
@@ -142,7 +143,7 @@ namespace CRUDServices
             return sortedPersons.ToList();
         }
 
-        public PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest)
+        public async Task<PersonResponse> UpdatePerson(PersonUpdateRequest? personUpdateRequest)
         {
             if (personUpdateRequest == null) throw new ArgumentNullException(nameof(personUpdateRequest));
 
@@ -150,7 +151,7 @@ namespace CRUDServices
             ValidationHelper.ModelValidation(personUpdateRequest);
 
             // get matching person obj for updating and check for null
-            Person? matchingPerson = _db.Persons.FirstOrDefault(p => p.PersonID == personUpdateRequest.PersonID);
+            Person? matchingPerson = await _db.Persons.FirstOrDefaultAsync(p => p.PersonID == personUpdateRequest.PersonID);
             if (matchingPerson == null) throw new ArgumentException("Given person ID does not exist.");
 
             // update details
@@ -162,21 +163,21 @@ namespace CRUDServices
             matchingPerson.Address = personUpdateRequest.Address;
             matchingPerson.ReceiveNewsLetters = personUpdateRequest.ReceiveNewsLetters;
 
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
             return matchingPerson.ToPersonResponse();
         }
 
-        public bool DeletePerson(Guid? personID)
+        public async Task<bool> DeletePerson(Guid? personID)
         {
             if (personID == null) throw new ArgumentNullException(nameof(personID));
 
-            Person? matchingPerson = _db.Persons.FirstOrDefault(p => p.PersonID == personID);
+            Person? matchingPerson = await _db.Persons.FirstOrDefaultAsync(p => p.PersonID == personID);
 
             if (matchingPerson == null) return false;
 
             _db.Persons.Remove(matchingPerson);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
             return true;
         }

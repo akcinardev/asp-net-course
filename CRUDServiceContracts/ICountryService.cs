@@ -12,19 +12,19 @@ namespace CRUDServiceContracts
         /// </summary>
         /// <param name="countryAddRequest">Country object to add.</param>
         /// <returns>The Country object after adding it. (Includes newly generated Country ID.)</returns>
-        CountryResponse AddCountry(CountryAddRequest? countryAddRequest);
+        Task<CountryResponse> AddCountry(CountryAddRequest? countryAddRequest);
 
         /// <summary>
         /// Gets all countries as a list.
         /// </summary>
         /// <returns>All countries as a list.</returns>
-        List<CountryResponse> GetAllCountries();
+        Task<List<CountryResponse>> GetAllCountries();
 
         /// <summary>
         /// Gets a Country object based on given CountryID.
         /// </summary>
         /// <param name="countryID">CountryID to search</param>
         /// <returns>Matching country as CountryResponse object.</returns>
-        CountryResponse? GetCountryByCountryID(Guid? countryID);
+        Task<CountryResponse?> GetCountryByCountryID(Guid? countryID);
     }
 }
